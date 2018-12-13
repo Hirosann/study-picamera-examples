@@ -12,7 +12,7 @@ class FaceDetector(object):
         return self.face_count
     
     def set_face_count():
-        return self.face_count += 1
+        self.face_count += 1
     
     def __init__(self, flip = True):
         self.vs = PiVideoStream(resolution=(800, 608)).start()
