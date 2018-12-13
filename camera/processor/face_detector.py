@@ -6,13 +6,6 @@ import numpy as np
 import cv2
 
 class FaceDetector(object):
-    face_count = 0
-    
-    def get_face_count():
-        return self.face_count
-    
-    def set_face_count(num):
-        self.face_count = num
     
     def __init__(self, flip = True):
         self.vs = PiVideoStream(resolution=(800, 608)).start()
@@ -44,15 +37,15 @@ class FaceDetector(object):
         # 上記でグレースケールに変換したものをインスタンス化した顔分類器の
         # detectMultiScaleメソッドで処理し、認識した顔の座標情報を取得する
         faces = self.face_cascade.detectMultiScale(gray, 1.3, 3)
-        
+        face_count = 0
         # 取得した座標情報を元に、cv2.rectangleを使ってframe上に
         # 顔の位置を描画する
         for (x,y,w,h) in faces:
 #            cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
-        cnt = self.get_face_count() + 1
-        self.set_face_count(cnt)
+            face_count += 1
+
         font = cv2.FONT_HERSHEY_SIMPLEX
-        cv2.putText(frame,str(self.get_face_count()),(10,500), font, 4,(255,255,255),2,cv2.LINE_AA)
+        cv2.putText(frame,face_count,(10,500), font, 4,(255,255,255),2,cv2.LINE_AA)
         # frameを戻り値として返す
         return frame
