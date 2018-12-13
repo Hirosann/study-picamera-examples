@@ -11,8 +11,8 @@ class FaceDetector(object):
     def get_face_count():
         return self.face_count
     
-    def set_face_count():
-        self.face_count += 1
+    def set_face_count(num):
+        self.face_count = num + 1
     
     def __init__(self, flip = True):
         self.vs = PiVideoStream(resolution=(800, 608)).start()
@@ -50,7 +50,7 @@ class FaceDetector(object):
         for (x,y,w,h) in faces:
 #            cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
-        self.set_face_count()
+        self.set_face_count(get_face_count)
         font = cv2.FONT_HERSHEY_SIMPLEX
         cv2.putText(frame,str(get_face_count()),(10,500), font, 4,(255,255,255),2,cv2.LINE_AA)
         # frameを戻り値として返す
