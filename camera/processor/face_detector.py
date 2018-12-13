@@ -6,8 +6,6 @@ import numpy as np
 import cv2
 
 class FaceDetector(object):
-
-    face_count = 0
     
     def __init__(self, flip = True):
         self.vs = PiVideoStream(resolution=(800, 608)).start()
@@ -32,6 +30,8 @@ class FaceDetector(object):
         return jpeg.tobytes()
 
     def process_image(self, frame):
+        face_count = 0
+        
         # opencvでframe(カラー画像)をグレースケールに変換
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
