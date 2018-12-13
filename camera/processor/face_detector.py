@@ -50,7 +50,8 @@ class FaceDetector(object):
         for (x,y,w,h) in faces:
 #            cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
-        self.set_face_count(self.get_face_count() + int(1))
+        cnt = self.get_face_count() + 1
+        self.set_face_count(cnt)
         font = cv2.FONT_HERSHEY_SIMPLEX
         cv2.putText(frame,str(self.get_face_count()),(10,500), font, 4,(255,255,255),2,cv2.LINE_AA)
         # frameを戻り値として返す
